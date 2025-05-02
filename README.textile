@@ -1,0 +1,48 @@
+h1. aks_header – Compress your pages on the fly.
+
+"Download":https://github.com/makss/aks_header/releases | "Issues":https://github.com/makss/aks_header/issues
+
+h2. Features:
+
+* Set any page headers. It's useful for create your custom feeds.
+* Strip white spaces on the fly.
+* GZIP compress on the fly.
+* 301 redirect non exist pages or directories to other place.
+* Calculate and set @Etag@ header
+
+
+
+h2. Examples:
+
+Place on top your page template
+
+pre. <txp:aks_header strip="1" gzip="1" /><!DOCTYPE html  . . .
+
+
+or place on top your xml page template
+
+pre. <txp:aks_header name="Content-Type" value="application/rss+xml" strip="1" gzip="1" /><?xml version="1.0" . . .
+
+
+h2. Tests
+
+|_. Page|_. Original size|_. Strip white spaces|_. GZIP|_. Strip+GZIP|
+|http://makss.uaho.net/plugins/aks_rss|16726 bytes|15385 bytes|4234 bytes|4039 bytes|
+|Save space from original size|0 %|8 %|75 %|76 %|
+
+
+
+h2. aks_301 - Simple 301 redirect with conditions
+
+This tag useful for redirect non exist pages or directories to other place.
+Default: to domain root.
+
+
+
+h2. Compile aks_header plugin
+
+bc. git clone https://github.com/makss/aks_header.git
+
+bc. $ composer install
+
+bc. $ composer compile
