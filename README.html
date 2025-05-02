@@ -1,0 +1,117 @@
+<h1>aks_header</h1>
+
+<h2>Features:</h2>
+<ul>
+    <li>Set any page headers. It’s useful for create your custom feeds.</li>
+    <li>Strip white spaces on the fly.</li>
+    <li><span class="caps">GZIP</span> compress on the fly.</li>
+    <li>301 redirect non exist pages or directories to other place.</li>
+</ul>
+<br>
+
+<h2><code>&lt;txp:aks_header /&gt;</code></h2>
+<table width="100%">
+    <thead>
+        <tr><th>Attributes</th><th>Default</th><th>Example</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>name</td><td><code>'Content-Type'</code></td><td><code>'Content-Type'</code></td><td>header</td></tr>
+        <tr><td>value</td><td><code>''</code></td><td><code>'application/rss+xml'</code></td><td>header</td></tr>
+        <tr><td>gzip</td><td><code>'0'</code></td><td><code>'1'</code></td><td><span class="caps"><span class="caps">GZIP</span></span> compressions</td></tr>
+        <tr><td>strip</td><td><code>'0'</code></td><td><code>'1'</code></td><td>Strip white spaces</td></tr>
+        <tr><td>nostrip</td><td><code>'pre,code,textarea,script,style'</code></td><td><code>'pre'</code></td><td>Not Strip tags</td></tr>
+        <tr><td>file</td><td><code>'0'</code></td><td><code>'1'</code></td><td>Auto set header per file extension</td></tr>
+        <tr><td>nodebug</td><td><code>'0'</code></td><td><code>'1'</code></td><td>Set production_status = ‘live’</td></tr>
+        <tr><td>nocache</td><td><code>'0'</code></td><td><code>'1'</code></td><td>Set <strong>no-cache</strong> header</td></tr>
+    </tbody>
+</table>
+
+<h3>Examples:</h3>
+<p>Place on top your page template</p>
+<pre>&lt;txp:aks_header strip="1" gzip="1" /&gt;&lt;!DOCTYPE html  . . .
+
+</pre>
+
+<p>or place on top your xml page template</p>
+<pre>&lt;txp:aks_header name="Content-Type" value="application/rss+xml" strip="1" gzip="1" /&gt;&lt;?xml version="1.0" . . .
+</pre>
+
+<br><h3>Set header per file extension. “File” attribute</h3>
+<p><strong>Support file extensions:</strong></p> <pre>	'txt' =&gt; 'text/plain',
+	'css' =&gt; 'text/css',
+	'js' =&gt; 'application/x-javascript',
+	'xml' =&gt; 'application/rss+xml'
+
+</pre>
+
+<br><h2><strong>&lt;txp:aks_301 /&gt;</strong> — place this tag <strong>!!!ONLY!!!</strong> to start your page.</h2>
+
+<p>aks_301 – Simple 301 redirect with conditions</p>
+<p>This tag useful for redirect non exist pages or directories to other place.<br> Default: to domain root.</p>
+
+<p>Sample my <strong>error_default</strong> page:</p> <pre>&lt;txp:aks_301 start="/categories/|/article/" /&gt;&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+&lt;head&gt;
+[skip...]
+</pre>
+
+<h3>Attributes</h3>
+
+<table width="100%">
+    <thead>
+        <tr><th>Attribute</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>start</strong></td><td><code>''</code></td><td>one or more conditions. Delimiter: <code>|</code></td></tr>
+        <tr><td><strong>url</strong></td><td><code>'http://yourdomain.com/'</code></td><td>one or more urls. Delimiter: <code>|</code> Default: your domail root</td></tr>
+        <tr>
+            <td><strong>ignore</strong></td>
+            <td><code>&#39;&#39;</code></td>
+            <td>one or more conditions. Delimiter: <code>|</code>. Does nothing.</td>
+        </tr>
+        <tr>
+            <td><strong>black</strong></td>
+            <td> <code>&#39;cltreq.asp|owssvr.dll&#39;</code> </td>
+            <td>one or more conditions. Delimiter: <code>|</code>. Return 404 header and exit.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>.</p>
+<h3>Examples</h3><p><strong>error_default</strong> page:</p>
+
+<pre>&lt;txp:aks_301 start="/categories/" url="http://mydomain.com/somepage.html" /&gt;
+
+all non exist pages in /categories/* - 301 redirect to http://mydomain.com/somepage.html
+</pre>
+
+<pre>&lt;txp:aks_301 start="/categories/|/section1/" /&gt;
+all non exist pages in /categories/* and /section1/* - 301 redirect to domain root
+</pre>
+
+<pre>&lt;txp:aks_301 start="/" /&gt;
+ALL non exist pages  - 301 redirect to domain root
+</pre> <p><strong>default</strong> page:</p> <pre>&lt;txp:aks_301 start="/categories/" url="http://mydomain.com/somepage.html" /&gt;
+all EXIST pages in /categories/* - 301 redirect to http://mydomain.com/somepage.html
+
+</pre>
+
+<pre>&lt;txp:aks_301 start="/" url="http://otherdomain.com/" /&gt;
+ALL EXIST pages  - 301 redirect to http://otherdomain.com/
+</pre>
+<br>
+
+<h3>Changelog:</h3>
+
+<pre>
+0.3.8.4    add header Vary: Accept-Encoding
+0.3.9	redesing code, values
+	added:	aks_header_etag
+			etag attribute
+			If-None-Match  -  304 Not Modified
+0.4		clear mark  aks_...	used in aks_meta, aks_backlink
+0.4.1		Txp 4.6 fixed
+
+</pre>

@@ -1,0 +1,39 @@
+{
+    "name": "makss/aks_header",
+    "description": "Strip white spaces and GZIP compress pages on the fly. Set any page headers. Simple 301 redirect with conditions. Etag/If-None-Match support",
+    "keywords": ["textpattern", "plugin"],
+    "homepage": "https://github.com/makss/aks_header",
+    "license": "GPL-2.0",
+    "type": "textpattern-plugin",
+    "authors": [
+        {
+            "name": "makss",
+            "homepage": "https://github.com/makss",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/makss/aks_header/issues",
+        "source": "https://github.com/makss/aks_header"
+    },
+    "require": {
+        "php": ">=5.5",
+        "ext-zlib": "*",
+        "textpattern/lock": ">=4.5.0",
+        "textpattern/installer": "*"
+    },
+    "require-dev": {
+        "rah/mtxpc": "^0.9.0",
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "scripts": {
+        "lint": "./vendor/bin/phpcs",
+        "lint-fix": "./vendor/bin/phpcbf",
+        "compile": "mtxpc --outdir=dist/ -c . && mtxpc --outdir=dist/ ."
+    },
+    "config": {
+        "allow-plugins": {
+            "textpattern/installer": true
+        }
+    }
+}

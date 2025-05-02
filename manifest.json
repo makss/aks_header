@@ -1,0 +1,17 @@
+{
+    "name": "aks_header",
+    "description": "Strip white spaces and GZIP compress pages on the fly. Set any page headers. Simple 301 redirect with conditions. Etag/If-None-Match support",
+    "version": "0.4.1",
+    "type": 0,
+    "author": "makss",
+    "author_uri": "https://github.com/makss/aks_header",
+    "order": 1,
+    "flags": 0,
+    "help": {"file" : "./README.html"},
+    "code": {"file" : [
+        "./src/aks_header.php",
+        "./src/aks_header_etag.php",
+        "./src/aks_301.php",
+        "./src/index.php"
+    ]}
+}
